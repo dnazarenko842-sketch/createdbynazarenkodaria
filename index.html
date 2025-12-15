@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дар'я Назаренко - Портфоліо</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Навігація */
+        nav {
+            background: rgba(15, 15, 30, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #4a5568;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav li {
+            cursor: pointer;
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        nav li:hover {
+            background: rgba(74, 85, 104, 0.3);
+            transform: translateY(-2px);
+        }
+
+        nav li.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Сторінки */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Картка */
+        .card {
+            background: rgba(30, 30, 50, 0.8);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(74, 85, 104, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            color: #a0aec0;
+            border-bottom: 2px solid #4a5568;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #cbd5e0;
+        }
+
+        /* Персональна інформація */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-item {
+            background: rgba(74, 85, 104, 0.2);
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Контакти */
+        .contact-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .contact-list li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-list i {
+            color: #667eea;
+            width: 25px;
+        }
+
+        /* Навички */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Досвід роботи */
+        .experience-item {
+            background: rgba(74, 85, 104, 0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #764ba2;
+        }
+
+        .date {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Загрози та рекомендації */
+        .threat-item, .recommendation-item {
+            background: rgba(74, 85, 104, 0.2);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .recommendation-item {
+            border-left-color: #48bb78;
+        }
+
+        .threat-number, .recommendation-number {
+            display: inline-block;
+            background: #e53e3e;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .recommendation-number {
+            background: #48bb78;
+        }
+
+        .threat-title, .recommendation-title {
+            font-size: 1.2rem;
+            color: #cbd5e0;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Мови */
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: rgba(74, 85, 104, 0.15);
+            border-radius: 8px;
+        }
+
+        .language-level {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Хобі */
+        .hobby-card {
+            background: rgba(102, 126, 234, 0.15);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="active" onclick="showPage('about')">Про мене</li>
+            <li onclick="showPage('resume')">Резюме</li>
+            <li onclick="showPage('analysis')">Аналітичний звіт</li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Сторінка 1: Про мене -->
+        <div id="about" class="page active">
+            <div class="card">
+                <h1>Дар'я Назаренко</h1>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Факультет:</strong>
+                        Факультет міжнародної торгівлі та права
+                    </div>
+                    <div class="info-item">
+                        <strong>Група:</strong>
+                        ФМТП 1-7
+                    </div>
+                    <div class="info-item">
+                        <strong>Дисципліна:</strong>
+                        Інформаційні технології в забезпеченні економічної безпеки держави
+                    </div>
+                </div>
+
+                <h2>Контактна інформація</h2>
+                <ul class="contact-list">
+                    <li><i class="fas fa-envelope"></i> dnazarenko842@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> +380 95 698 7734</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Київ, Україна</li>
+                    <li><i class="fab fa-whatsapp"></i> +380 95 698 7734</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Сторінка 2: Резюме -->
+        <div id="resume" class="page">
+            <div class="card">
+                <h1>Резюме</h1>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Дата народження:</strong>
+                        03.09.2007
+                    </div>
+                    <div class="info-item">
+                        <strong>Місце народження:</strong>
+                        Краматорськ, Україна
+                    </div>
+                    <div class="info-item">
+                        <strong>Громадянство:</strong>
+                        Українка
+                    </div>
+                </div>
+
+                <h2><i class="fas fa-briefcase"></i> Досвід роботи</h2>
+                <div class="experience-item">
+                    <h3>Персональний тренер та нутриціолог</h3>
+                    <div class="date">01.01.2025 – 31.08.2025</div>
+                    <p><strong>TopHalls Fitness Studio</strong> | Ковель, Україна</p>
+                </div>
+
+                <h2><i class="fas fa-graduation-cap"></i> Освіта</h2>
+                <div class="experience-item">
+                    <h3>Середня освіта</h3>
+                    <div class="date">01.09.2014 – 31.05.2025</div>
+                    <p><strong>Краматорська ЗОШ №25</strong> | Краматорськ, Україна</p>
+                    <p>Спеціалізація: Природничі науки, математика та статистика</p>
+                </div>
+
+                <h2><i class="fas fa-language"></i> Мовні навички</h2>
+                <div class="language-item">
+                    <span>Українська (рідна)</span>
+                    <span class="language-level">C2</span>
+                </div>
+                <div class="language-item">
+                    <span>Російська (рідна)</span>
+                    <span class="language-level">C2</span>
+                </div>
+                <div class="language-item">
+                    <span>Англійська</span>
+                    <span class="language-level">B2</span>
+                </div>
+
+                <h2><i class="fas fa-tools"></i> Професійні навички</h2>
+                <div class="skills-grid">
+                    <div class="skill-tag">Корекція вправ</div>
+                    <div class="skill-tag">Призначення тренувань</div>
+                    <div class="skill-tag">Фітнес-консультування</div>
+                    <div class="skill-tag">Оцінка фізичного стану</div>
+                    <div class="skill-tag">Визначення цілей клієнтів</div>
+                    <div class="skill-tag">Принципи тренувань</div>
+                    <div class="skill-tag">Анатомія людини</div>
+                    <div class="skill-tag">Безпека тренувань</div>
+                    <div class="skill-tag">Нутриціологія</div>
+                    <div class="skill-tag">Комунікація з молоддю</div>
+                </div>
+
+                <h2><i class="fas fa-hands-helping"></i> Волонтерська діяльність</h2>
+                <div class="experience-item">
+                    <h3>Дитяча гімнастика</h3>
+                    <div class="date">01.05.2025 – 31.08.2025</div>
+                    <p><strong>Ковель, Україна</strong></p>
+                    <p>Організація та проведення занять з дитячої гімнастики. Допомога у розвитку м'язів, формуванні правильної постави та покращенні гнучкості. Розвиток впевненості у кожному русі та координації.</p>
+                </div>
+
+                <h2><i class="fas fa-heart"></i> Хобі та інтереси</h2>
+                <div class="hobby-card">
+                    <h3>Танці</h3>
+                    <p><strong>Ансамбль "Деліс"</strong> (01.01.2017 – 24.02.2022) - Краматорський естрадно-спортивний танцювальний ансамбль. Набуття всіх необхідних сценічних навичок.</p>
+                    <p><strong>Ансамбль "Ритми часу"</strong> - Продовження кар'єри у Львові.</p>
+                </div>
+
+                <h2><i class="fas fa-award"></i> Творчі роботи</h2>
+                <div class="experience-item">
+                    <h3>Підготовка до конкурсів для дітей</h3>
+                    <div class="date">05.09.2023 – 05.06.2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Сторінка 3: Аналітичний звіт -->
+        <div id="analysis" class="page">
+            <div class="card">
+                <h1>Аналіз економічної безпеки Великої Британії</h1>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem; color: #a0aec0;">
+                    Комплексний аналіз п'яти основних загроз економічній безпеці Великої Британії та рекомендації щодо їх подолання на основі даних Світового банку та офіційних джерел.
+                </p>
+
+                <h2><i class="fas fa-exclamation-triangle"></i> П'ять основних загроз</h2>
+
+                <div class="threat-item">
+                    <div>
+                        <span class="threat-number">1</span>
+                        <span class="threat-title">Кіберзагрози та атаки на критичну інфраструктуру</span>
+                    </div>
+                    <p>У 2024 році Національний центр кібербезпеки зафіксував 430 кіберінцидентів, 89 з яких були класифіковані як національно значущі. Британські компанії зазнали понад 7,78 мільйонів кібератак, що коштувало економіці близько 44,6 мільярдів фунтів стерлінгів. Фішинг залишається найпоширенішою формою атаки і впливає на 84% бізнесів.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div>
+                        <span class="threat-number">2</span>
+                        <span class="threat-title">Високий державний борг та дефіцит бюджету</span>
+                    </div>
+                    <p>Державний борг Великої Британії досяг 95% від ВВП у 2024 році і прогнозується зростання до 104% до 2026 року. Дефіцит бюджету становив 5,7% ВВП у 2024 році, що є четвертим найвищим показником серед розвинених економік. Витрати на обслуговування боргу становлять 9% загальних доходів уряду порівняно з середнім показником у 6% за два десятиліття до 2020 року.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div>
+                        <span class="threat-number">3</span>
+                        <span class="threat-title">Стійка інфляція та вартість життя</span>
+                    </div>
+                    <p>Інфляція у Великій Британії залишається підвищеною і становить 3,5% у 2025 році, що на 0,9 процентних пункти вище середнього показника розвинених економік (2,6%). Зростання цін на енергоносії, збільшення внесків роботодавців до національного страхування та глобальна невизначеність у торгівлі сприяють інфляційному тиску. Реальна заробітна плата зростає повільніше за вартість життя.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div>
+                        <span class="threat-number">4</span>
+                        <span class="threat-title">Наслідки Brexit: торговельні бар'єри та зниження продуктивності</span>
+                    </div>
+                    <p>За даними досліджень, Brexit знизив ВВП на душу населення на 6-8% до 2025 року. Експорт товарів до ЄС скоротився на 27%, а імпорт на 32% між 2021 та 2023 роками. Інвестиції знизилися на 12-18%, зайнятість на 3-4%, а продуктивність на 3-4% порівняно зі сценарієм залишення у ЄС. Нетарифні бар'єри створюють значні труднощі для малого та середнього бізнесу.</p>
+                </div>
+
+                <div class="threat-item">
+                    <div>
+                        <span class="threat-number">5</span>
+                        <span class="threat-title">Залежність від критичних мінералів та енергетична вразливість</span>
+                    </div>
+                    <p>Велика Британія споживає близько 30% світового виробництва критичних мінералів, але виробляє лише 2-3% світових поставок. Китай домінує у більшості ланцюгів постачання критичних мінералів Великої Британії, будучи основним виробником 21 з 34 критичних мінералів. Це створює вразливість до зброєнізації цієї залежності та турбулентності в ланцюзі постачання.</p>
+                </div>
+
+                <h2 style="margin-top: 3rem;"><i class="fas fa-lightbulb"></i> П'ять ключових рекомендацій</h2>
+
+                <div class="recommendation-item">
+                    <div>
+                        <span class="recommendation-number">1</span>
+                        <span class="recommendation-title">Посилення кіберзахисту та впровадження Закону про кібербезпеку</span>
+                    </div>
+                    <p>Прискорити впровадження Закону про кібербезпеку та стійкість, який охоплює понад 1000 постачальників послуг. Обов'язкова звітність про кіберінциденти протягом 24 годин і повні звіти протягом 72 годин. Збільшити підтримку підприємствам через безкоштовні інструменти та керівництва NCSC, включаючи Cyber Essentials. Розширити інвестиції у захист критичної інфраструктури, особливо у системах охорони здоров'я, енергетики та транспорту.</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <div>
+                        <span class="recommendation-number">2</span>
+                        <span class="recommendation-title">Фіскальна консолідація зі збереженням інвестицій у зростання</span>
+                    </div>
+                    <p>Впровадити поступову фіскальну консолідацію, скоротивши дефіцит до 4,5% ВВП до 2026 року через збільшення податкових надходжень та оптимізацію витрат. Зберегти інвестиції у капітальні витрати (додаткові 28 мільярдів фунтів на рік до кінця прогнозного періоду) для підтримки довгострокового зростання. Диверсифікувати базу інвесторів для державного боргу, щоб зменшити залежність від чутливих до ціни іноземних покупців.</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <div>
+                        <span class="recommendation-number">3</span>
+                        <span class="recommendation-title">Монетарна політика та контроль інфляції</span>
+                    </div>
+                    <p>Підтримувати поступові зниження процентних ставок Банком Англії (по 25 базисних пунктів на квартал) для досягнення кінцевої ставки 3,5% до першого кварталу 2026 року. Забезпечити баланс між контролем інфляції та підтримкою економічного зростання. Впровадити структурні реформи для зниження впливу зовнішніх шоків на внутрішню інфляцію, включаючи диверсифікацію енергопостачання.</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <div>
+                        <span class="recommendation-number">4</span>
+                        <span class="recommendation-title">Поліпшення торговельних відносин та підвищення продуктивності</span>
+                    </div>
+                    <p>Прагнути до цільових покращень Угоди про торгівлю та співробітництво (TCA), зосередившись на зменшенні нетарифних бар'єрів та регуляторної розбіжності. Вести переговори про угоди про взаємне визнання у ключових секторах, таких як хімічна та фармацевтична промисловість. Підтримувати малі та середні підприємства у адаптації до торговельних бар'єрів через цільові програми підтримки. Інвестувати у підвищення продуктивності через реконфігурацію ланцюгів постачання та інновації.</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <div>
+                        <span class="recommendation-number">5</span>
+                        <span class="recommendation-title">Диверсифікація постачання критичних ресурсів та енергетична безпека</span>
+                    </div>
+                    <p>Розробити національну стратегію критичних мінералів для зменшення залежності від одного постачальника (Китаю). Інвестувати у внутрішні потужності з видобутку та переробки критичних мінералів. Встановити стратегічні партнерства з альтернативними постачальниками для диверсифікації ланцюгів постачання. Прискорити перехід до відновлюваних джерел енергії та покращити енергетичну стійкість для зменшення вразливості до зовнішніх енергетичних шоків.</p>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h3 style="color: #667eea; margin-top: 0;">Висновок</h3>
+                    <p>Велика Британія стикається з комплексними викликами економічної безпеки, від кіберзагроз до структурних економічних обмежень після Brexit. Реалізація цих рекомендацій вимагає скоординованих зусиль уряду, бізнесу та міжнародних партнерів. Пріоритет має бути наданий короткостроковому захисту критичної інфраструктури при одночасному створенні довгострокової стійкості через інвестиції, інновації та диверсифікацію.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Сховати всі сторінки
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показати вибрану сторінку
+            document.getElementById(pageId).classList.add('active');
+            
+            // Оновити активний пункт меню
+            document.querySelectorAll('nav li').forEach(li => {
+                li.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Прокрутити вгору
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
